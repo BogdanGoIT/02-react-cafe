@@ -8,12 +8,18 @@ import VoteStats from "../VoteStats/VoteStats";
 function App() {
   const [votes, setVotes] = useState<Votes>({ good: 0, neutral: 0, bad: 0 });
   function handleVote(type: VoteType) {
-    console.log(votes);
     setVotes({
       ...votes,
       [type]: votes[type] + 1,
     });
   }
+
+  const totalVotes = votes.bad + votes.good + votes.neutral;
+
+  const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0;
+
   function resetVotes() {
     setVotes({ good: 0, neutral: 0, bad: 0 });
     console.log(votes);
@@ -23,7 +29,11 @@ function App() {
     <div className={css.app}>
       <CafeInfo />
       <VoteOptions onVote={handleVote} onReset={resetVotes} canReset={true} />
-      <VoteStats votes={votes} totalVotes={0} positiveRate={0} />
+      <VoteStats
+        votes={votes}
+        totalVotes={totalVotes}
+        positiveRate={positiveRate}
+      />
     </div>
   );
 }
