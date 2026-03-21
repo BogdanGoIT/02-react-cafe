@@ -31,7 +31,7 @@ function App() {
       <VoteOptions
         onVote={handleVote}
         onReset={resetVotes}
-        canReset={totalVotes}
+        canReset={totalVotes > 0}
       />
       {totalVotes ? (
         <VoteStats
@@ -40,7 +40,7 @@ function App() {
           positiveRate={positiveRate}
         />
       ) : (
-        Notification()
+        <Notification />
       )}
     </div>
   );

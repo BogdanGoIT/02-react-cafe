@@ -4,7 +4,7 @@ import css from "./VoteOptions.module.css";
 interface VoteOptionsProps {
   onVote: (type: VoteType) => void;
   onReset: () => void;
-  canReset: number;
+  canReset: boolean;
 }
 
 export default function VoteOptions({
@@ -23,7 +23,7 @@ export default function VoteOptions({
       <button onClick={() => onVote("bad")} className={css.button}>
         Bad
       </button>
-      {canReset > 0 && (
+      {canReset && (
         <button onClick={onReset} className={`${css.button} ${css.reset}`}>
           Reset
         </button>
