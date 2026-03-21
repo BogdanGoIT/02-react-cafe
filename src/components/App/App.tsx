@@ -9,10 +9,10 @@ import Notification from "../Notification/Notification";
 function App() {
   const [votes, setVotes] = useState<Votes>({ good: 0, neutral: 0, bad: 0 });
   function handleVote(type: VoteType) {
-    setVotes({
-      ...votes,
-      [type]: votes[type] + 1,
-    });
+    setVotes((prevVotes) => ({
+      ...prevVotes,
+      [type]: prevVotes[type] + 1,
+    }));
   }
 
   const totalVotes = votes.bad + votes.good + votes.neutral;
